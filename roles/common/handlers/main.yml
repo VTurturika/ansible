@@ -1,0 +1,9 @@
+
+- name: restart php7.0-fpm and nginx
+  command: "ls"
+  # service:
+  #   name: '{{ item }}'
+  #   state: restarted
+  # with_items:
+  #   - php7.0-fpm
+  #   - nginx

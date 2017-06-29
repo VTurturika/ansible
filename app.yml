@@ -1,18 +1,25 @@
 
-# This playbook deploys the whole application stack in this site.
-
-- name: configure and deploy the webservers and application code
-  hosts: webservers
+- name: deploy stack and code
+  hosts: web
   remote_user: victor
   become: true
   become_method: sudo
   roles:
-    - webserver
+    - common
+    - postfix
 
-- name: install email testing stuff
-  hosts: mailservers
+- name: deploy mailhog
+  hosts: mail
   remote_user: victor
   become: true
   become_method: sudo
   roles:
     - mailhog
+
+- name: configure postfix and mailhog
+  hosts: web
+  remote_user: victor
+  become: true
+  become_method: sudo
+  roles:
+    - mailhog_with_postfix

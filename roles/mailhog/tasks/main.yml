@@ -1,2 +1,6 @@
 
 - include: docker.yml
+  when: mailhog is undefined
+
+- include: mailhog.yml
+  when: mailhog is defined

@@ -1,0 +1,9 @@
+
+[web]
+192.168.57.2
+
+[web:vars]
+stage="staging"
+
+[mail]
+192.168.57.3

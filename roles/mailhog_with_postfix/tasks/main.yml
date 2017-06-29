@@ -1,0 +1,10 @@
+
+- name: enable mailhog in postfix
+  command: "ls"
+  when: mailhog is defined and mailhog == "start"
+  notify: restart postfix
+
+- name: disable mailhog in postfix
+  command: "ls"
+  when: mailhog is defined and mailhog == "stop"
+  notify: restart postfix

@@ -1,0 +1,26 @@
+
+- name: install postfix
+  command: "ls"
+  # apt:
+  #   name: mailutils
+  #   state: present
+
+- name: configure postfix
+  command: "ls"
+  # lineinfile:
+  #   path: /etc/postfix/main.cf
+  #   regexp: '(mynetworks = ).*'
+  #   line: '\1'
+  #   state: present
+  #   backrefs: yes
+  notify: restart postfix
+
+- name: setup production config
+  command: "ls"
+  when: stage == "production"
+  notify: restart postfix
+
+- name: setup staging config
+  command: "ls"
+  when: stage == "staging"
+  notify: restart postfix
