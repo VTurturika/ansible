@@ -6,6 +6,13 @@
   remote_user: victor
   become: true
   become_method: sudo
-
   roles:
     - webserver
+
+- name: install email testing stuff
+  hosts: mailservers
+  remote_user: victor
+  become: true
+  become_method: sudo
+  roles:
+    - mailhog
