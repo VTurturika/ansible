@@ -6,3 +6,8 @@
   with_items:
     - php7.0-fpm
     - nginx
+
+- name: restart postfix
+  service:
+    name: postfix
+    state: restarted
