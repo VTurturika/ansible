@@ -1,0 +1,27 @@
+
+- name: install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: install php stuff
+  apt:
+    name: php
+    state: present
+
+- name: configure php-fpm and nginx
+  lineinfile:
+    path: /etc/nginx/sites-enabled/default
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+    state: present
+    backrefs: yes
+  with_items:
+    - regexp: '#(location ~ \\\.php.*)'
+      line: '\1'
+    - regexp: '#(\s*include snippets/fastcgi-php\.conf;)'
+      line: '\1'
+    - regexp: 'fastcgi_pass unix:/run/php/php7\.0-fpm\.sock;'
+      line: 'fastcgi_pass unix:/run/php/php7.0-fpm.sock;}'
+  notify: restart php7.0-fpm and nginx
