@@ -1,6 +1,5 @@
 
 - name: pull app code from git
-  command: "ls"
-  # git:
-  #   repo: 'https://github.com/VTurturika/ansible-app-backend'
-  #   dest: /var/www/html
+  git:
+    repo: 'https://github.com/VTurturika/ansible-app-backend'
+    dest: /var/www/html/*

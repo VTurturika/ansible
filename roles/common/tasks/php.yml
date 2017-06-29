@@ -1,32 +1,29 @@
 
 - name: install nginx
-  command: "ls"
-  # apt:
-  #   name: nginx
-  #   state: present
-  #   update_cache: yes
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
 
 - name: install php
-  command: "ls"
-  # apt:
-  #   name: php
-  #   state: present
+  apt:
+    name: php
+    state: present
 
 - name: configure php-fpm and nginx
-  command: "ls"
-  # lineinfile:
-  #   path: /etc/nginx/sites-enabled/default
-  #   regexp: '{{ item.regexp }}'
-  #   line: '{{ item.line }}'
-  #   state: present
-  #   backrefs: yes
-  # with_items:
-  #   - regexp: 'index index\.html (.*)'
-  #     line: 'index index.php index.html \1'
-  #   - regexp: '#(location ~ \\\.php.*)'
-  #     line: '\1'
-  #   - regexp: '#(\s*include snippets/fastcgi-php\.conf;)'
-  #     line: '\1'
-  #   - regexp: 'fastcgi_pass unix:/run/php/php7\.0-fpm\.sock;'
-  #     line: 'fastcgi_pass unix:/run/php/php7.0-fpm.sock;}'
+  lineinfile:
+    path: /etc/nginx/sites-enabled/default
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+    state: present
+    backrefs: yes
+  with_items:
+    - regexp: 'index index\.html (.*)'
+      line: 'index index.php index.html \1'
+    - regexp: '#(location ~ \\\.php.*)'
+      line: '\1'
+    - regexp: '#(\s*include snippets/fastcgi-php\.conf;)'
+      line: '\1'
+    - regexp: 'fastcgi_pass unix:/run/php/php7\.0-fpm\.sock;'
+      line: 'fastcgi_pass unix:/run/php/php7.0-fpm.sock;}'
   notify: restart php7.0-fpm and nginx
