@@ -1,1 +1,5 @@
 
+- name: enable docker autostart
+  systemd:
+    name: docker
+    enabled: yes

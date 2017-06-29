@@ -1,19 +1,17 @@
 
 - name: get gpg key for docker
-  command: "ls"
-  # apt_key:
-  #   url: https://download.docker.com/linux/ubuntu/gpg
-  #   state: present
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
 - name: add repository for docker
-  command: "ls"
-  # apt_repository:
-  #   repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
-  #   state: present
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
 
 - name: install docker
-  command: "ls"
-  # apt:
-  #   name: docker-ce
-  #   state: present
-  #   update_cache: yes
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+  notify: enable docker autostart
