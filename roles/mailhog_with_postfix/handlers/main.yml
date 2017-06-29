@@ -1,6 +1,5 @@
 
 - name: restart postfix
-  command: "ls"
-  # service:
-  #   name: postfix
-  #   state: restarted
+  service:
+    name: postfix
+    state: restarted

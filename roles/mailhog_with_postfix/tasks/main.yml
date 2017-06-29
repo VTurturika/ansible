@@ -1,10 +1,20 @@
 
 - name: enable mailhog in postfix
-  command: "ls"
+  lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: 'relayhost = '
+    line: 'relayhost = 192.168.57.3:1025'
+    state: present
+    backrefs: yes
   when: mailhog is defined and mailhog == "start"
   notify: restart postfix
 
 - name: disable mailhog in postfix
-  command: "ls"
+  lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: '(relayhost = ).*'
+    line: '\1'
+    state: present
+    backrefs: yes
   when: mailhog is defined and mailhog == "stop"
   notify: restart postfix
